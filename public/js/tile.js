@@ -1,4 +1,4 @@
-class Tile {
+/* class Tile {
     constructor(x, y, player) {
         this.x = x;
         this.y = y;
@@ -35,4 +35,4 @@ class Tile {
         return t.lookRow(xdif, ydif, inRow + 1);
     }
 
-}
+} */
