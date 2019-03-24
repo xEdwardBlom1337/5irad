@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
             y = data.y < 0 ? data.y - data.y % tileSize - tileSize : data.y - data.y % tileSize;
             if (tools.searchTile(data.x, data.y, socket.room.tiles) == null) {
                 socket.room.tiles.push(new tools.Tile(data.x, data.y, socket.id));
-                let playerIndex = tools.indexOf(socket.room.players, socket.io);
+                let playerIndex = tools.indexOf(socket.room.players, socket.id);
                 socket.emit('move', {
                     x: x,
                     y: y,
