@@ -24,7 +24,7 @@ class Tile {
         for (let pair of dirPairs) {
             let forward = this.lookRow(pair[0], pair[1], 0);
             let backward = this.lookRow(-pair[0], -pair[1], 0);
-            if (forward + backward + 1 >= 5) return true;
+            if (forward + backward + 1 >= rowLength) return true;
         }
         return false;
     }
