@@ -18,7 +18,7 @@ class Tile {
         for (let pair of dirPairs) {
             let forward = this.lookRow(pair[0], pair[1], 0, tiles);
             let backward = this.lookRow(-pair[0], -pair[1], 0, tiles);
-            if (forward + backward + 1 >= rowLength) return true;
+            if (forward + backward + 1 >= 5) return true;
         }
         return false;
     }
@@ -55,6 +55,7 @@ class Room {
         this.players = [];
         this.round = 0;
         this.tiles = [];
+        this.gameOver = false;
     }
 }
 

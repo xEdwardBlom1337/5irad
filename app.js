@@ -31,18 +31,23 @@ io.on('connection', function(socket) {
     });
 
     socket.on('tryMove', function(data) {
-        if (socket.id == socket.room.players[socket.room.round % 2]) {
-            x = data.x < 0 ? data.x - data.x % tileSize - tileSize : data.x - data.x % tileSize;
-            y = data.y < 0 ? data.y - data.y % tileSize - tileSize : data.y - data.y % tileSize;
-            if (tools.searchTile(data.x, data.y, socket.room.tiles) == null) {
-                socket.room.tiles.push(new tools.Tile(data.x, data.y, socket.id));
-                let playerIndex = tools.indexOf(socket.room.players, socket.id);
-                io.sockets.in(socket.room.roomCode).emit('move', {
-                    x: x,
-                    y: y,
-                    color: playerIndex == 0 ? 'hotpink' : 'limegreen'
-                });
-                socket.room.round++;
+        if (!socket.room.gameOver) {
+            if (socket.id == socket.room.players[socket.room.round % 2]) {
+                x = data.x < 0 ? data.x - data.x % tileSize - tileSize : data.x - data.x % tileSize;
+                y = data.y < 0 ? data.y - data.y % tileSize - tileSize : data.y - data.y % tileSize;
+                if (tools.searchTile(x, y, socket.room.tiles) == null) {
+                    socket.room.tiles.push(new tools.Tile(x, y, socket.id));
+                    let playerIndex = tools.indexOf(socket.room.players, socket.id);
+                    io.sockets.in(socket.room.roomCode).emit('move', {
+                        x: x,
+                        y: y,
+                        color: playerIndex == 0 ? 'hotpink' : 'limegreen'
+                    });
+                    if (socket.room.tiles[socket.room.tiles.length-1].checkWin(socket.room.tiles)) {
+                        socket.room.gameOver = true;
+                    }
+                    socket.room.round++;
+                }
             }
         }
     });
