@@ -58,8 +58,6 @@ function animate() {
     for (let t of tiles) {
         draw(t);
     }
-    console.log(tiles);
-    
     c.restore();
     
 

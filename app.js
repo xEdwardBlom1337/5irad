@@ -37,7 +37,7 @@ io.on('connection', function(socket) {
             if (tools.searchTile(data.x, data.y, socket.room.tiles) == null) {
                 socket.room.tiles.push(new tools.Tile(data.x, data.y, socket.id));
                 let playerIndex = tools.indexOf(socket.room.players, socket.id);
-                socket.emit('move', {
+                io.sockets.in(socket.room.roomCode).emit('move', {
                     x: x,
                     y: y,
                     color: playerIndex == 0 ? 'hotpink' : 'limegreen'
