@@ -16,11 +16,20 @@ app.get('/', function (req, res) {
 const tileSize = 25;
 
 let rooms = [];
-rooms.push(new tools.Room);
 io.on('connection', function(socket) {
     
-    socket.on('joinRoom', function() {
-        socket.room = rooms[0];
+    socket.on('joinRoom', function(data) {
+        let roomIndex = null;
+        for (let i = 0; i < rooms.length; i++) {
+            if (rooms[i].roomCode == data) roomIndex = i;
+        }
+
+        if (roomIndex != null) {
+            socket.room = rooms[roomIndex];
+        } else {
+            socket.room = new tools.Room;
+            rooms.push(socket.room);
+        }
         socket.join(socket.room.roomCode);
         socket.emit('joinSuccess', "Connected to room: " + socket.room.roomCode);
         if (socket.room.players.length == 0) {

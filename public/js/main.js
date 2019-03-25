@@ -11,7 +11,7 @@ let tiles = [];
 
 socket.on('joinSuccess', function(data) {
     console.log(data);
-    document.getElementById('room-code').innerHTML = data;
+    document.getElementById('room').innerHTML = data;
 });
 
 socket.on('move', function(tile) {
@@ -65,6 +65,6 @@ function animate() {
 
 function join() {
     animate();
-    socket.emit('joinRoom');
+    socket.emit('joinRoom', document.getElementById('room-code').value);
     document.getElementById("panel").classList.toggle("hidden");
 }

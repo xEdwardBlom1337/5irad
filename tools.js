@@ -49,9 +49,11 @@ function indexOf(element, arr) {
     return null;
 }
 
+let x = 0;
 class Room {
     constructor() {
-        this.roomCode = 'abc';
+        this.roomCode = 'abc' + x;
+        x++;
         this.players = [];
         this.round = 0;
         this.tiles = [];
