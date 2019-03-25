@@ -40,7 +40,7 @@ function searchTile(x, y, tiles) {
     return null;
 }
 
-function indexOf(arr, element) {
+function indexOf(element, arr) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == element) {
             return i

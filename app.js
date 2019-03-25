@@ -28,16 +28,19 @@ io.on('connection', function(socket) {
         } else {
             socket.room.players[1] = socket.id;
         }
+        console.log("Player joined room " + socket.room.roomCode +
+                    ": " + socket.id);
+        
     });
 
     socket.on('tryMove', function(data) {
-        if (!socket.room.gameOver) {
+        if (socket.room != undefined && !socket.room.gameOver) {
             if (socket.id == socket.room.players[socket.room.round % 2]) {
                 x = data.x < 0 ? data.x - data.x % tileSize - tileSize : data.x - data.x % tileSize;
                 y = data.y < 0 ? data.y - data.y % tileSize - tileSize : data.y - data.y % tileSize;
                 if (tools.searchTile(x, y, socket.room.tiles) == null) {
                     socket.room.tiles.push(new tools.Tile(x, y, socket.id));
-                    let playerIndex = tools.indexOf(socket.room.players, socket.id);
+                    let playerIndex = tools.indexOf(socket.id, socket.room.players);
                     io.sockets.in(socket.room.roomCode).emit('move', {
                         x: x,
                         y: y,

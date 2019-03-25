@@ -59,10 +59,12 @@ function animate() {
         draw(t);
     }
     c.restore();
-    
 
     requestAnimationFrame(animate);
 }
 
-socket.emit('joinRoom');
-animate();
+function join() {
+    animate();
+    socket.emit('joinRoom');
+    document.getElementById("panel").classList.toggle("hidden");
+}

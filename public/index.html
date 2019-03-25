@@ -9,8 +9,17 @@
     <title>5irad</title>
 </head>
 <body>
-    <canvas id="canvas" class="hidden"></canvas>
+    <canvas id="canvas"></canvas>
     <script type="text/javascript" src="js/main.js"></script>
     <p id="room-code"></p>
+    <div id="panel" class="panel">
+        <h1>5irad</h1>
+        <div class="input-box">
+            <input type="text" placeholder="Leave empty for random room" id="name">
+        </div>
+        <div class="button">
+            <button onclick="join()">Join room</button>
+        </div>
+    </div>
 </body>
 </html>
