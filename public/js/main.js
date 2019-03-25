@@ -6,12 +6,12 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const tileSize = 25;
-const rowLength = 5;
 
 let tiles = [];
 
 socket.on('joinSuccess', function(data) {
     console.log(data);
+    document.getElementById('room-code').innerHTML = data;
 });
 
 socket.on('move', function(tile) {
