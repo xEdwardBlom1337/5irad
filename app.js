@@ -25,7 +25,12 @@ io.on('connection', function(socket) {
         }
 
         if (roomIndex != null) {
-            socket.room = rooms[roomIndex];
+            if (rooms[roomIndex].players.length < 2) {
+                socket.room = rooms[roomIndex];
+            } else {
+                socket.emit('fullRoom');
+                return;
+            }
         } else {
             socket.room = new tools.Room;
             rooms.push(socket.room);

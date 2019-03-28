@@ -12,7 +12,13 @@ let tiles = [];
 socket.on('joinSuccess', function(data) {
     console.log(data);
     document.getElementById('room').innerHTML = data;
+    document.getElementById("panel").classList.toggle("hidden");
 });
+
+socket.on('fullRoom', function() {
+    alert('This room is full');
+});
+
 
 socket.on('gameOver', function() {
     alert('GAME OVER');
@@ -70,5 +76,4 @@ function animate() {
 function join() {
     animate();
     socket.emit('joinRoom', document.getElementById('room-code').value);
-    document.getElementById("panel").classList.toggle("hidden");
 }
