@@ -1,4 +1,4 @@
-let socket = io('localhost:8000');
+let socket = io('192.168.195.235:8000');
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
 
@@ -12,6 +12,10 @@ let tiles = [];
 socket.on('joinSuccess', function(data) {
     console.log(data);
     document.getElementById('room').innerHTML = data;
+});
+
+socket.on('gameOver', function() {
+    alert('GAME OVER');
 });
 
 socket.on('move', function(tile) {

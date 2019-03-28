@@ -57,6 +57,7 @@ io.on('connection', function(socket) {
                     });
                     if (socket.room.tiles[socket.room.tiles.length-1].checkWin(socket.room.tiles)) {
                         socket.room.gameOver = true;
+                        io.sockets.in(socket.room.roomCode).emit('gameOver');
                     }
                     socket.room.round++;
                 }
