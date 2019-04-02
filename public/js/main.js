@@ -1,9 +1,11 @@
-let socket = io('192.168.195.235:8000');
+let socket = io('localhost:8000');
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+c.lineWidth = 3;
+c.strokeStyle = "rgb(240, 240, 240)";
 
 const tileSize = 25;
 
@@ -69,6 +71,17 @@ function animate() {
         draw(t);
     }
     c.restore();
+    
+    c.beginPath();
+    for (let x = 1.5 + translation.x % tileSize; x < canvas.width; x += tileSize) {
+        c.moveTo(x, 0);
+        c.lineTo(x, canvas.height);
+    }
+    for (let y = 1.5 + translation.y % tileSize; y < canvas.height; y += tileSize) {
+        c.moveTo(0, y);
+        c.lineTo(canvas.width, y);
+    }
+    c.stroke();
 
     requestAnimationFrame(animate);
 }

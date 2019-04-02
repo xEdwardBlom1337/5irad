@@ -6,6 +6,8 @@ Display a grid in the field of view on client?
 
 Implement local multiplayer (Room with one client)
 
+Make players unable to place to far from center
+
 Show better game over screen
 
 Refactor socket 'tryMove' into multiple functions
