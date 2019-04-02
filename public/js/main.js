@@ -5,7 +5,6 @@ let c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 c.lineWidth = 3;
-c.strokeStyle = "rgb(240, 240, 240)";
 
 const tileSize = 25;
 
@@ -71,7 +70,8 @@ function animate() {
         draw(t);
     }
     c.restore();
-    
+
+    c.strokeStyle = "rgb(240, 240, 240)";
     c.beginPath();
     for (let x = 1.5 + translation.x % tileSize; x < canvas.width; x += tileSize) {
         c.moveTo(x, 0);
@@ -82,6 +82,9 @@ function animate() {
         c.lineTo(canvas.width, y);
     }
     c.stroke();
+
+    c.strokeStyle = "red";
+    c.strokeRect(translation.x + 1.5, translation.y + 1.5, 250, 250);
 
     requestAnimationFrame(animate);
 }

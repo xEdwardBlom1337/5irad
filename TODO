@@ -1,7 +1,7 @@
-Implement local multiplayer (Room with one client)
-
 Make players unable to place to far from center
 
 Show better game over screen
+
+Implement local multiplayer (Room with one client)
 
 Refactor socket 'tryMove' into multiple functions
