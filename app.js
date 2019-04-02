@@ -48,7 +48,9 @@ io.on('connection', function(socket) {
     });
 
     socket.on('tryMove', function(data) {
-        if (socket.room != undefined && !socket.room.gameOver) {
+        if (socket.room != undefined) {
+            if (socket.room.gameOver) return;
+            if (socket.room.players.length != 2) return;
             if (socket.id == socket.room.players[socket.room.round % 2]) {
                 x = data.x < 0 ? data.x - data.x % tileSize - tileSize : data.x - data.x % tileSize;
                 y = data.y < 0 ? data.y - data.y % tileSize - tileSize : data.y - data.y % tileSize;

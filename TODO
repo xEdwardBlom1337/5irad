@@ -1,9 +1,3 @@
-First player shouldn't be able to make the first move until 
-other player has joined OR render first players move when
-second player joins
-
-Display a grid in the field of view on client?
-
 Implement local multiplayer (Room with one client)
 
 Make players unable to place to far from center
