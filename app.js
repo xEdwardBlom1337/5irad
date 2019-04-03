@@ -36,15 +36,17 @@ io.on('connection', function(socket) {
             rooms.push(socket.room);
         }
         socket.join(socket.room.roomCode);
-        socket.emit('joinSuccess', "Connected to room: " + socket.room.roomCode);
         if (socket.room.players.length == 0) {
             socket.room.players[0] = socket.id;
         } else {
             socket.room.players[1] = socket.id;
         }
+        socket.emit('joinSuccess', {
+            room: "Connected to room: " + socket.room.roomCode, 
+            turn: tools.indexOf(socket.id, socket.room.players)
+        });
         console.log("Player joined room " + socket.room.roomCode +
                     ": " + socket.id);
-        
     });
 
     socket.on('tryMove', function(data) {

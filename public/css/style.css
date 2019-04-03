@@ -12,7 +12,13 @@
     top: 0;
     left: 0;
     margin: 0;
+}
 
+#turn {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    margin: 0;
 }
 
 .hidden {

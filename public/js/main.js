@@ -9,10 +9,14 @@ c.lineWidth = 3;
 const tileSize = 25;
 
 let tiles = [];
+let player = 0;
+let round = 0;
 
 socket.on('joinSuccess', function(data) {
     console.log(data);
-    document.getElementById('room').innerHTML = data;
+    document.getElementById('room').innerHTML = data.room;
+    player = Number(data.turn);
+    document.getElementById('turn').innerHTML = player + round % 2 == 0 ? "Your turn" : "Other player's turn";
     document.getElementById("panel").classList.toggle("hidden");
 });
 
@@ -27,6 +31,8 @@ socket.on('gameOver', function() {
 
 socket.on('move', function(tile) {
     tiles.push(tile);
+    round++;
+    document.getElementById('turn').innerHTML = (player + round) % 2 == 0 ? "Your turn" : "Other player's turn";
 });
 
 let mouseStart = {
