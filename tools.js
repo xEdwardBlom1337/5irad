@@ -56,10 +56,10 @@ function randInt(min, max) {
 class Room {
     constructor() {
         this.roomCode = String.fromCharCode(
-            randInt(48,91),
-            randInt(48,91),
-            randInt(48,91),
-            randInt(48,91)
+            randInt(65,90),
+            randInt(65,90),
+            randInt(65,90),
+            randInt(65,90)
             );
         this.players = [];
         this.round = 0;

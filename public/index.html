@@ -15,7 +15,7 @@
     <div id="panel" class="panel">
         <h1>5irad</h1>
         <div class="input-box">
-            <input type="text" id="room-code" placeholder="Leave empty to create room">
+            <input type="text" id="room-code" placeholder="Leave empty to create room" oninput="this.value = this.value.toUpperCase()">
         </div>
         <div class="button">
             <button onclick="join()">Join room</button>
