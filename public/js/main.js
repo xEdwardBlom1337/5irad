@@ -5,6 +5,7 @@ let c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 c.lineWidth = 3;
+c.strokeStyle = "rgb(240, 240, 240)";
 
 const tileSize = 25;
 
@@ -13,7 +14,6 @@ let player = 0;
 let round = 0;
 
 socket.on('joinSuccess', function(data) {
-    console.log(data);
     document.getElementById('room').innerHTML = data.room;
     player = Number(data.turn);
     document.getElementById('turn').innerHTML = player + round % 2 == 0 ? "Your turn" : "Other player's turn";
@@ -77,7 +77,6 @@ function animate() {
     }
     c.restore();
 
-    c.strokeStyle = "rgb(240, 240, 240)";
     c.beginPath();
     for (let x = 1.5 + translation.x % tileSize; x < canvas.width; x += tileSize) {
         c.moveTo(x, 0);
@@ -89,8 +88,14 @@ function animate() {
     }
     c.stroke();
 
-    c.strokeStyle = "red";
-    c.strokeRect(translation.x + 1.5, translation.y + 1.5, 250, 250);
+    let lastMove = tiles[tiles.length-1];
+    if (lastMove != null) {
+        c.fillStyle = "rgba(0, 0, 0, 0.1)";
+        c.beginPath();
+        c.arc(lastMove.x + tileSize / 2, lastMove.y + tileSize / 2, 180, 0, Math.PI*2);
+        c.fill();
+        c.closePath();
+    }
 
     requestAnimationFrame(animate);
 }

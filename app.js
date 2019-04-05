@@ -56,9 +56,10 @@ io.on('connection', function(socket) {
             if (socket.id == socket.room.players[socket.room.round % 2]) {
                 x = data.x < 0 ? data.x - data.x % tileSize - tileSize : data.x - data.x % tileSize;
                 y = data.y < 0 ? data.y - data.y % tileSize - tileSize : data.y - data.y % tileSize;
-                if (socket.room.round == 0) {
-                    if (x < 0 || x >= 250 ) return;
-                    if (y < 0 || y >= 250) return;
+                let lastMove = socket.room.tiles[socket.room.tiles.length-1];
+                if (lastMove != null) {
+                    let distance = Math.sqrt(Math.pow(lastMove.x - x, 2) + Math.pow(lastMove.y - y, 2));
+                    if (distance > 180) return;
                 }
                 if (tools.searchTile(x, y, socket.room.tiles) == null) {
                     socket.room.tiles.push(new tools.Tile(x, y, socket.id));
