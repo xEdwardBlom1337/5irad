@@ -1,4 +1,4 @@
-Make players unable to place to far from center
+Show direction of last move
 
 Drag map smoothly
 
@@ -7,3 +7,5 @@ Show better game over screen
 Implement local multiplayer (Room with one client)
 
 Refactor socket 'tryMove' into multiple functions
+
+Implement touch

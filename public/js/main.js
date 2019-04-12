@@ -1,4 +1,4 @@
-let socket = io('localhost:8000');
+let socket = io('192.168.195.235:8000');
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
 
@@ -90,9 +90,9 @@ function animate() {
 
     let lastMove = tiles[tiles.length-1];
     if (lastMove != null) {
-        c.fillStyle = "rgba(0, 0, 0, 0.1)";
+        c.fillStyle = "rgba(0, 0, 0, 0.05)";
         c.beginPath();
-        c.arc(lastMove.x + tileSize / 2, lastMove.y + tileSize / 2, 180, 0, Math.PI*2);
+        c.arc(lastMove.x + tileSize / 2 + translation.x, lastMove.y + tileSize / 2 + translation.y, 180, 0, Math.PI*2);
         c.fill();
         c.closePath();
     }
