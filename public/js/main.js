@@ -1,4 +1,4 @@
-let socket = io('192.168.195.235:8000');
+let socket = io('localhost:8000');
 let canvas = document.getElementById('canvas');
 let c = canvas.getContext('2d');
 
@@ -70,6 +70,7 @@ function draw(obj) {
 
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
+    let lastMove = tiles[tiles.length-1];
     c.save();
     c.translate(translation.x, translation.y);
     for (let t of tiles) {
@@ -87,14 +88,30 @@ function animate() {
         c.lineTo(canvas.width, y);
     }
     c.stroke();
-
-    let lastMove = tiles[tiles.length-1];
+    
     if (lastMove != null) {
         c.fillStyle = "rgba(0, 0, 0, 0.05)";
         c.beginPath();
         c.arc(lastMove.x + tileSize / 2 + translation.x, lastMove.y + tileSize / 2 + translation.y, 180, 0, Math.PI*2);
         c.fill();
         c.closePath();
+        
+        let lastdifX = lastMove.x + translation.x;
+        let lastdifY = lastMove.y + translation.y;
+        if (!(lastdifX > 0 && lastdifX < canvas.width && lastdifY > 0 && lastdifY < canvas.height)) {
+            c.save();
+            c.fillStyle = "rgba(255, 0, 0, 0.5)";
+            let testt = Math.atan2(lastMove.y + translation.y - canvas.height / 2, lastMove.x + translation.x - canvas.width / 2);
+            c.translate(canvas.width / 2, canvas.height / 2);
+            c.rotate(testt);
+            c.beginPath();
+            c.moveTo(300-10, 10);
+            c.lineTo(300-10, -10);
+            c.lineTo(320, 0);
+            c.lineTo(300-10, 10);
+            c.fill();
+            c.restore();
+        }
     }
 
     requestAnimationFrame(animate);
