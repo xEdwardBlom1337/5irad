@@ -92,7 +92,7 @@ function animate() {
     if (lastMove != null) {
         c.fillStyle = "rgba(0, 0, 0, 0.05)";
         c.beginPath();
-        c.arc(lastMove.x + tileSize / 2 + translation.x, lastMove.y + tileSize / 2 + translation.y, 180, 0, Math.PI*2);
+        c.arc(lastMove.x + tileSize / 2 + translation.x, lastMove.y + tileSize / 2 + translation.y, 250, 0, Math.PI*2);
         c.fill();
         c.closePath();
         
